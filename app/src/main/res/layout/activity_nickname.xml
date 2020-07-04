@@ -7,7 +7,7 @@
     tools:context=".NicknameActivity">
 
     <TextView
-        android:id="@+id/tv_nickname"
+        android:id="@+id/tv_nickname0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="167dp"
@@ -32,7 +32,7 @@
         app:layout_constraintBottom_toTopOf="@+id/btn_done"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_nickname" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_nickname0" />
 
     <Button
         android:id="@+id/btn_done"
