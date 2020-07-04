@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1045439337533",
+    "firebase_url": "https://shop-e7740.firebaseio.com",
+    "project_id": "shop-e7740",
+    "storage_bucket": "shop-e7740.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1045439337533:android:32743999daf39aa19a0654",
+        "android_client_info": {
+          "package_name": "tw.khliu.shop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1045439337533-sv8tnjdq74832ktuqgt9fq876i23vqa6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "tw.khliu.shop",
+            "certificate_hash": "8c8a8e893121d0ae35d46fcb3dab0c2e8f2e7936"
+          }
+        },
+        {
+          "client_id": "1045439337533-c707svujtn1lp6b45an7877ne1i79lt3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBiAv5-Az42nA0MVV0-jCXpqBtNh-uU1Zk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1045439337533-c707svujtn1lp6b45an7877ne1i79lt3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
