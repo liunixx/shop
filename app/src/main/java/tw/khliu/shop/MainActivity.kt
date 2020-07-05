@@ -6,7 +6,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Adapter
+import android.widget.AdapterView
+import android.widget.AdapterView.*
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AlertDialog
 import com.google.firebase.auth.FirebaseAuth
@@ -33,7 +36,22 @@ class MainActivity : AppCompatActivity() {
         val adapter = ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,colors)
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line)
         spn.adapter=adapter
-        
+        spn.onItemSelectedListener = object:OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                Log.d("MainActivity","Selected idx : ${position}, item : ${colors[position]}")
+            }
+
+        }
+
     }
 
     override fun onResume() {
