@@ -6,18 +6,25 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Adapter
 import android.widget.AdapterView
 import android.widget.AdapterView.*
 import android.widget.ArrayAdapter
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.row_function.view.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,12 +32,29 @@ class MainActivity : AppCompatActivity() {
     private val REQ_SIGNUP: Int= 100
     val auth = FirebaseAuth.getInstance()
     var signup=false
+    val functions = listOf<String>(
+        "Camera"
+        ,"Invite Friends"
+        ,"Parking"
+        ,"Download Coupon"
+        ,"Maps"
+        ,"News1"
+        ,"News2"
+        ,"News3"
+        ,"News4"
+        ,"News5"
+        ,"News6"
+        ,"News7"
+        ,"News8"
+        ,"News9"
+        ,"News10"
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        auth.addAuthStateListener { auth2->
-            authChanged(auth2)
+        auth.addAuthStateListener { auth->
+            authChanged(auth)
         }
         val colors = arrayOf("red","green","blue","yellow")
         val adapter = ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,colors)
@@ -52,6 +76,31 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+        // recycler view
+        recycler.layoutManager = LinearLayoutManager(this)
+        recycler.setHasFixedSize(true)
+        recycler.adapter = FunctionAdapter()
+    }
+
+    inner class FunctionAdapter():RecyclerView.Adapter<FunctionHolder>() {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FunctionHolder {
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.row_function,parent,false)
+            val holder = FunctionHolder(view)
+            return holder
+        }
+
+        override fun getItemCount(): Int {
+           return functions.size
+        }
+
+        override fun onBindViewHolder(holder: FunctionHolder, position: Int) {
+                 holder.nameText.text = functions.get(position)
+        }
+
+    }
+
+    class FunctionHolder(view :View):RecyclerView.ViewHolder(view){
+            var nameText: TextView = view.tv_item_name
     }
 
     override fun onResume() {
@@ -89,7 +138,7 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode==REQ_SIGNUP) {
-            if(resultCode== Activity.RESULT_OK) {
+            if(resultCode==Activity.RESULT_OK) {
                 val intent = Intent(this,NicknameActivity::class.java)
                 startActivityForResult(intent,REQ_NICKNAME)
             }
