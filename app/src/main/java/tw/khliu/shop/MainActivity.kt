@@ -27,7 +27,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.row_function.view.*
 
 class MainActivity : AppCompatActivity() {
-
+    private val TAG="MainActivity"
     private val REQ_NICKNAME: Int=110
     private val REQ_SIGNUP: Int= 100
     val auth = FirebaseAuth.getInstance()
@@ -95,8 +95,18 @@ class MainActivity : AppCompatActivity() {
 
         override fun onBindViewHolder(holder: FunctionHolder, position: Int) {
                  holder.nameText.text = functions.get(position)
+                 holder.itemView.setOnClickListener { view->
+                     functionClick(holder, position)
+                 }
         }
 
+    }
+
+    private fun functionClick(holder: FunctionHolder, position: Int) {
+        Log.d(TAG,"function clicked : $position")
+        when(position){
+            1->startActivity(Intent(this,ContactActivity::class.java))
+        }
     }
 
     class FunctionHolder(view :View):RecyclerView.ViewHolder(view){
