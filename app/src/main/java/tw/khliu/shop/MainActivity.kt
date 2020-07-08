@@ -106,6 +106,7 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG,"function clicked : $position")
         when(position){
             1->startActivity(Intent(this,ContactActivity::class.java))
+            2->startActivity(Intent(this,ParkingActivity::class.java))
         }
     }
 
