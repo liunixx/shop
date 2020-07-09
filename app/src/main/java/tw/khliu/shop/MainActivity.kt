@@ -64,7 +64,6 @@ class MainActivity : AppCompatActivity() {
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 TODO("Not yet implemented")
             }
-
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 view: View?,
@@ -96,13 +95,13 @@ class MainActivity : AppCompatActivity() {
         override fun onBindViewHolder(holder: FunctionHolder, position: Int) {
                  holder.nameText.text = functions.get(position)
                  holder.itemView.setOnClickListener { view->
-                     functionClick(holder, position)
+                     functionClicked(holder, position)
                  }
         }
 
     }
 
-    private fun functionClick(holder: FunctionHolder, position: Int) {
+    private fun functionClicked(holder: FunctionHolder, position: Int) {
         Log.d(TAG,"function clicked : $position")
         when(position){
             1->startActivity(Intent(this,ContactActivity::class.java))

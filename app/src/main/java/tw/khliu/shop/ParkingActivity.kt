@@ -7,7 +7,7 @@ import kotlinx.android.synthetic.main.activity_parking.*
 import org.jetbrains.anko.*
 import java.net.URL
 
-class ParkingActivity : AppCompatActivity() , AnkoLogger{
+class ParkingActivity : AppCompatActivity() , AnkoLogger {
     private val _TAG=this::class.java.simpleName
     private val _URL = "http://www.saja.com.tw/site/mall/?json=Y"
     override fun onCreate(savedInstanceState: Bundle?) {
