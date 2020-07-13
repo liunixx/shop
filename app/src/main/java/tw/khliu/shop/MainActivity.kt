@@ -38,16 +38,8 @@ class MainActivity : AppCompatActivity() {
         ,"Parking"
         ,"Download Coupon"
         ,"Maps"
-        ,"News1"
-        ,"News2"
-        ,"News3"
-        ,"News4"
-        ,"News5"
-        ,"News6"
-        ,"News7"
-        ,"News8"
-        ,"News9"
-        ,"News10"
+        ,"News"
+        ,"Bus Data"
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -104,9 +96,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun functionClick(holder: FunctionHolder, position: Int) {
         Log.d(TAG,"function clicked : $position")
+        //startActivity(Intent(this,BusdataActivity::class.java))
+
         when(position){
+            6->startActivity(Intent(this,BusdataActivity::class.java))
             1->startActivity(Intent(this,ContactActivity::class.java))
             2->startActivity(Intent(this,ParkingActivity::class.java))
+
         }
     }
 
