@@ -95,14 +95,14 @@ class MainActivity : AppCompatActivity() {
 
     private fun functionClicked(holder: FunctionHolder, position: Int) {
         Log.d(TAG,"function clicked : $position")
-        //startActivity(Intent(this,BusdataActivity::class.java))
+        // startActivity(Intent(this,BusdataActivity::class.java))
 
         when(position){
             6->startActivity(Intent(this,BusdataActivity::class.java))
             1->startActivity(Intent(this,ContactActivity::class.java))
             2->startActivity(Intent(this,ParkingActivity::class.java))
-
         }
+
     }
 
     class FunctionHolder(view :View):RecyclerView.ViewHolder(view){
