@@ -16,6 +16,10 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.info
 import org.jetbrains.anko.uiThread
+import retrofit2.Call
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.GET
 import java.net.URL
 
 class BusdataActivity : AppCompatActivity() ,AnkoLogger {
@@ -23,17 +27,24 @@ class BusdataActivity : AppCompatActivity() ,AnkoLogger {
     /*
       json 必須是 [{},{}....] 格式
      */
-    val _URL = "http://www.diandiandian.com.tw/busdata.php"
+    val _URL = "http://www.diandiandian.com.tw/"
     var busdatas:List<Busdata>?=null
-
+    val retrofit:Retrofit = Retrofit.Builder()
+        .baseUrl(_URL)
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_busdata)
         info("111111")
         doAsync {
-            val jstr = URL(_URL).readText()
-            busdatas =
-                Gson().fromJson<List<Busdata>>(jstr, object : TypeToken<List<Busdata>>() {}.type)
+//            val jstr = URL(_URL).readText()
+//            busdatas =
+//                Gson().fromJson<List<Busdata>>(jstr, object : TypeToken<List<Busdata>>() {}.type)
+            val busdataService = retrofit.create(BusdadaService::class.java)
+            busdatas=busdataService.listBusdata()
+                .execute()
+                .body()
             busdatas!!.forEach {
                 info("${it.BusID} - ${it.RouteID} : ${it.Speed}")
             }
@@ -75,22 +86,27 @@ class BusdataActivity : AppCompatActivity() ,AnkoLogger {
         }
     }
 }
-    data class Busdatas(
-        val datas: List<Busdata>
-    )
+data class Busdatas(
+    val datas: List<Busdata>
+)
 
-    data class Busdata(
-        val Azimuth: String,
-        val BusID: String,
-        val BusStatus: String,
-        val DataTime: String,
-        val DutyStatus: String,
-        val GoBack: String,
-        val Latitude: String,
-        val Longitude: String,
-        val ProviderID: String,
-        val RouteID: String,
-        val Speed: String,
-        val ledstate: String,
-        val sections: String
-    )
+data class Busdata(
+    val Azimuth: String,
+    val BusID: String,
+    val BusStatus: String,
+    val DataTime: String,
+    val DutyStatus: String,
+    val GoBack: String,
+    val Latitude: String,
+    val Longitude: String,
+    val ProviderID: String,
+    val RouteID: String,
+    val Speed: String,
+    val ledstate: String,
+    val sections: String
+)
+
+interface BusdadaService{
+    @GET("busdata.php")
+    fun listBusdata(): Call<List<Busdata>>
+}
